@@ -58,3 +58,17 @@ services:
             - "${MYSQL_PORT}:3306"
         networks:
             - backend
+
+    phpmyadmin:
+        build: ./phpmyadmin
+        container_name: ${CONTAINER_PHPMYADMIN_NAME}
+        restart: unless-stopped
+        tty: true
+        depends_on: 
+            - nginx
+        env_file:
+            - ./phpmyadmin/.env
+        ports:
+            - "${PHPMYADMIN_PORT}:80"
+        networks:
+            - backend
